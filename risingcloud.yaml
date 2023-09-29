@@ -1,32 +1,145 @@
+# Make sure you push the latest risingcloud.yaml file by running
+# `risingcloud push` after you make any changes here. If you don't,
+# the changes won't be reflected in the app when it is built.
+# See https://risingcloud.com/docs/config-glossary for more details
+# about individual fields and how the operate.
+
+# The name of the app is what is displayed on the ui for developers.
+# By default, this matches the url. However, unlike the url, this
+# may be changed as needed.
 name: bp-python-task
 
+# The app url is a unique value created during app initialization.
+# Once it is created, it cannot be changed. This is where you will send
+# requests: https://bp-python-task.risingcloud.app/risingcloud/jobs
+# This is static. Don't edit this value after creation!
 url: bp-python-task
 
+# The team ID is the internal ID of the team that owns the app.
+# This is static. Don't edit this value after creation!
 team: null
 
+# The mode describes how the app is deployed in the rising cloud
+# infrastructure. "risingcloud" indicates the job is run via a
+# script which reads from a "request.json" and writes to a
+# "response.json" located in the root of the project.
+# This is static. Don't edit this value after creation!
 mode: risingcloud
 
+# Workspace is simply an organizational tool. You may change this
+# value and the app will be change the workspace it appears under
+# in the ui. You do not have to create a new workspace, simply
+# changing the value here will update the ui.
 workspace: Sandbox
 
+# The base docker image to use when creating the dockerfile for
+# the app. For "risingcloud" mode apps, you can use any linux
+# based image. This requirement is due to the additional code
+# risingcloud adds to your app to make it integrate with the
+# greater risingcloud ecosystem.
+# WARNING: If you change this, you may run into issues with
+# the boilerplate makefile causing built-in testing to fail.
+
+# TODO: Check with @Derek that this is a restriction on 10/2/23 or if it is the below
+# Rising Cloud Apps support any base image, with tar and gzip installed.
 from: ubuntu:22.04
 
+# TODO: Add info about the general build process here OR link
+# to a website page with a better description of what happens.
+
+#   The rising cloud builder is set up as a multi-stage docker
+# build. The "build" attribute of the yaml describes what happens
+# in the first stage and "deps" describes the second.
+# After "build" completes, all the files generated in that stage
+# are copied over so the "deps" stage has them. None of the system
+# dependencies required to generate those files are passed to the
+# "deps step". Using the "build" attribute is more complex,
+# and is completely optional.
+#   When a build is completed, you can view the output of the
+# build log to see what the multi-stage build looks like.
+# "build" steps are prefaced with "[RisingCloud]", and
+# "deps" steps are prefaced with "[deps]".
+
+
+# List build script here in the format:
+# build:
+#  - command1
+#  - command2
+#  ...
+#  - commandN
+# The deps are a series of run commands which are added to the
+# second stage of the build process. No system dependencies
+# (Like library/package installs) will persist to the "deps"
+# stage. Only generated files will continue.
+
+# TODO: Get Clarifying information from Derek/Ant. There isn't
+# even an entry for this on the website.
 build: []
 
+# List of deps commands here in the format:
+# deps:
+#  - command1
+#  - command2
+#  ...
+#  - commandN
+# The deps are a series of run commands which are added to the
+# second stage of the build process. This is generally where you
+# will install package and library dependencies for your app.
+# Adjust the installed version of python if you so choose. Ensure
+# any commands in daemons/run match the version of python specified.
 deps:
  - apt-get update
  - apt-get -y upgrade
  - apt-get install -y python3
 
+# List of daemon commands here in the format:
+# daemons:
+#  - command1
+#  - command2
+#  ...
+#  - commandN
+# A Daemon is just a command that runs in the background as long
+# as your app is running (even if it isn't actively processing).
+# Rising Cloud does not monitor the health of your daemons, so
+# you will need to build dynamic checks into your app if you
+# cannot guarantee your Daemon's health. If you add/remove a daemon
+# here and you still want the boilerplate testing to work, be sure to
+# also add/remove the daemon from the `make rc-start-daemons` command.
 daemons: []
 
-run: python main.py
+# The command which will be run whenever a job is sent to the
+# rising cloud worker. This command should be resonsible for
+# reading from "request.json" and writing to "response.json".
+# Note: In order to run a .sh file using this attribute,
+# the run command should look like: `bash -c (SCRIPT_NAME)`
+run: python3 main.py
 
+# The timeout is the amount of time in milliseconds a
+# job can take before Rising Cloud considers it to
+# have failed and kills the process automatically.
 timeout: 300000
 
+# List of environment variables to include in your app in this format:
+# env:
+#  - key1: value1
+#  - key2: value2
+#  ...
+#  - keyN: valueN
+# These values are automatically loaded into the deployed app
+# as environment variables. A common pattern if you have separate
+# deployments of the same code in different environments, is to
+# have multiple risingcloud.yaml files in the project dir, named
+# risincloud-{env}.yaml
 env: {}
 
+# Min and max workers determines the scaling bounds for your
+# application. Rising cloud will never scale below the minWorkers
+# value, and never scale above the maxWorkers value.
 minWorkers: 0
-
 maxWorkers: 8
 
+# This is the amount of short-term storage space allocated to each
+# worker in MB. Files created during runtime will count against
+# this total, but the worker image itself does not. Ensure this
+# value is large enough to run the operating system.
 maxStorage: 4000
