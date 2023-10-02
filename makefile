@@ -21,10 +21,11 @@ rc-start-container:
 	make rc-start-daemons
 
 # Start all the daemons for the container. For every daemon you have,
-# add a line below in the form:
-# `docker exec -d bp-python-task {DAEMON_COMMAND}`
+# add a line below in the form: `docker exec -d bp-python-task {DAEMON_COMMAND}`
+# Ensure each daemon you add here is replicated in
+# the risingcloud.yaml under "daemons:"
 rc-start-daemons:
-	docker exec -d bp-python-task sleep 1
+#	docker exec -d bp-python-task {DAEMON_COMMAND}
 
 # Stops and removes the existing bp-pyton-task container
 rc-kill-container:

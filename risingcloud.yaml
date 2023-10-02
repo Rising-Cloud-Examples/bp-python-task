@@ -38,14 +38,7 @@ workspace: Sandbox
 # images might require different "build" and "deps" steps. Be sure you are
 # comfortable with the base image you are working with before making those
 # changes.
-
-# TODO: Check with @Derek that this is a restriction on 10/2/23 or if it is the
-# below Rising Cloud Apps support any base image, with tar and gzip installed.
-# It kind of seems like tar and gzip is all that's needed but I haven't tested.
 from: ubuntu:22.04
-
-# TODO: Add info about the general build process here OR link
-# to a website page with a better description of what happens.
 
 # The Rising Cloud builder is set up as a multi-stage docker build. The "build"
 # attribute of the yaml describes what happens in the first stage and "deps"
@@ -53,6 +46,8 @@ from: ubuntu:22.04
 # stage are copied over so the "deps" stage has them. None of the system
 # dependencies required to generate those files are passed to the "deps" step.
 # Using the "build" attribute is more complex, and is completely optional.
+# Each command in both steps are added to the dockerfile stage as
+# `RUN {COMMAND}` so ensure each command is compatible with that form.
 
 # When a build is completed, you can view the output of the build log to see
 # what the multi-stage build looks like. "build" steps are prefaced with
@@ -65,12 +60,9 @@ from: ubuntu:22.04
 #  - buildCommand2
 #  ...
 #  - buildCommandN
-# The deps are a series of run commands which are added to the second stage of
+# The deps are a series of run commands which are added to the first stage of
 # the build process. No system dependencies (Like library/package installs)
 # will persist to the "deps" stage. Only generated files will continue.
-
-# TODO: Get Clarifying information from Derek/Ant. There isn't
-# even an entry for this on the website.
 build: []
 
 # List of deps commands here in the format:
