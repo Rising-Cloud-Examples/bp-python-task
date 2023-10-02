@@ -26,11 +26,11 @@ rc-start-container:
 rc-start-daemons:
 	docker exec -d bp-python-task sleep 1
 
-# Tests a single request. This assumes the test container is already
-# up and running and the request file is passed in as $(f).
-# The resultant data will be saved in ./rcTests/responses
-# Example usage: `make rc-tc-test-single f={TEST_NAME}`
-# Don't include the full path to the test, the command will automatically
+# Tests a single request. This assumes the test container is already up and
+# running and the request file is passed in as $(f). The resultant data will
+# be saved in ./rcTests/responses/$(f).
+# Example usage: `make rc-test-single f={TEST_NAME}`
+# Don't include the full path to the test. The command will automatically
 # look for it in the ./rcTests/requests folder and add the .json extension.
 rc-test-single:
 	docker exec bp-python-task /bin/bash ./rcFunctions/runTest.sh $(f)

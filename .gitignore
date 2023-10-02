@@ -1,7 +1,8 @@
+.dockerignore
+**/__pycache__
+
+rcTests/responses/*
+!rcTests/responses/.tmp
 request.json
 response.json
 risingcloud_project.zip
-.dockerignore
-**/__pycache__
-rcTests/responses/*
-!rcTests/responses/.tmp
