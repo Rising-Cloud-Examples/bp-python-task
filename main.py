@@ -10,7 +10,7 @@ if __name__ == "__main__":
     # and replace this line with `response = arbitraryFunctionName(request)`.
     response = request
 
-    # Demonstration of logs that will be captured by the rising cloud worker.
+    # Demonstration of logs that will be captured by the Rising Cloud worker.
     # These logs will be reported in the app's /jobs page under the "Std Error"
     # and "Std Out" respectively. They serve no purpose other than to show
     # how to implement logs and how they will be captured by Rising Cloud.

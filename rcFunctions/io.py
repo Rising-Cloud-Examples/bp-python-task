@@ -2,7 +2,7 @@ import json, typing
 
 def readRequest() -> typing.Any:
     '''
-    readRequest will return the rising cloud request made to the worker.
+    readRequest will return the Rising Cloud request made to the worker.
     By default, this returns a dict. This reads from the "request.json" file
     which is created by Rising Cloud when the worker recieves a request.
     '''

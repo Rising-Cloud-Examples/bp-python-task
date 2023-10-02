@@ -26,7 +26,8 @@ daemons, networking, input/output, workers, and more there.
 
 ### Requirements
 - Python 3.5+
-- Docker (if locally testing)
+- Docker (To assist with local building and testing)
+- Support for `make` commands (To assist with local building and testing)
 
 ### Local Testing and Development
 
@@ -64,6 +65,8 @@ as well as in `rcTests/responses` folder. For this command to work, the file
 6. To run every test in the `/rcTests/requests/` folder in sequence:
 `make rc-test-all`.This will essentially run the `rc-test-single` over
 and over for every test file defined.
+7. Whenever you're done testing, you can clean up the docker environment with
+`rc-kill-container`.
 
 ### Building/Deploying
 Once you have locally tested your app and verified it's functioning as expected,

@@ -6,17 +6,17 @@
 # RC Make Commands #
 ####################
 
-# Grabs the dockerfile rising cloud uses to build the application
+# Grabs the dockerfile Rising Cloud uses to build the application
 # and builds the image locally. The image name will match the task-url.
 rc-build-test-image:
 	risingcloud build --local
 
 # Spin up the test-container. Stop and delete an old one if it exists.
-# The test container will be doing nothing so we can run tests into
-# the container mimicking how the task would run on rising cloud.
+# The test container will be doing nothing until we `docker exec` a command
+# onto it. This way we can hijack the run process to run tests in
+# the container mimicking how the task would run on Rising Cloud.
 rc-start-container:
-	docker stop bp-python-task || true
-	docker rm bp-python-task || true
+	make rc-kill-container
 	docker run -i -d --entrypoint="bash" --name bp-python-task --volume ${PWD}:/app/app bp-python-task
 	make rc-start-daemons
 
@@ -26,8 +26,13 @@ rc-start-container:
 rc-start-daemons:
 	docker exec -d bp-python-task sleep 1
 
+# Stops and removes the existing bp-pyton-task container
+rc-kill-container:
+	docker stop bp-python-task || true
+	docker rm bp-python-task || true
+
 # Tests a single request. This assumes the test container is already up and
-# running and the request file is passed in as $(f). The resultant data will
+# running and the request file is passed in as $(f). The resulting data will
 # be saved in ./rcTests/responses/$(f).
 # Example usage: `make rc-test-single f={TEST_NAME}`
 # Don't include the full path to the test. The command will automatically

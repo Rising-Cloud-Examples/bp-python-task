@@ -18,7 +18,7 @@ url: bp-python-task
 # This is static. Don't edit this value after creation!
 team: null
 
-# The mode describes how the app is deployed in the rising cloud infrastructure.
+# The mode describes how the app is deployed in the Rising Cloud infrastructure.
 # "risingcloud" indicates the job is run via a script which reads from a
 # "request.json" and writes to a "response.json" in the root of the project.
 # This is static. Don't edit this value after creation!
@@ -30,20 +30,24 @@ mode: risingcloud
 workspace: Sandbox
 
 # The base docker image to use when creating the dockerfile for the app. For
-# "risingcloud" mode apps, you can use any linux based image. This requirement
+# "risingcloud" mode apps, you can use any linux base image. This requirement
 # is due to the additional code risingcloud adds to your app to make it
 # integrate with the greater risingcloud ecosystem.
-# WARNING: If you change this, you may run into issues with
-# the boilerplate makefile causing built-in testing to fail.
+# WARNING: If you change this, you may run into issues with the boilerplate
+# makefile causing built-in testing to fail. Additionally, different base
+# images might require different "build" and "deps" steps. Be sure you are
+# comfortable with the base image you are working with before making those
+# changes.
 
 # TODO: Check with @Derek that this is a restriction on 10/2/23 or if it is the
 # below Rising Cloud Apps support any base image, with tar and gzip installed.
+# It kind of seems like tar and gzip is all that's needed but I haven't tested.
 from: ubuntu:22.04
 
 # TODO: Add info about the general build process here OR link
 # to a website page with a better description of what happens.
 
-# The rising cloud builder is set up as a multi-stage docker build. The "build"
+# The Rising Cloud builder is set up as a multi-stage docker build. The "build"
 # attribute of the yaml describes what happens in the first stage and "deps"
 # describes the second. After "build" completes, all the files generated in that
 # stage are copied over so the "deps" stage has them. None of the system
@@ -57,10 +61,10 @@ from: ubuntu:22.04
 
 # List build script here in the format:
 # build:
-#  - command1
-#  - command2
+#  - buildCommand1
+#  - buildCommand2
 #  ...
-#  - commandN
+#  - buildCommandN
 # The deps are a series of run commands which are added to the second stage of
 # the build process. No system dependencies (Like library/package installs)
 # will persist to the "deps" stage. Only generated files will continue.
@@ -71,10 +75,10 @@ build: []
 
 # List of deps commands here in the format:
 # deps:
-#  - command1
-#  - command2
+#  - depsCommand1
+#  - depsCommand2
 #  ...
-#  - commandN
+#  - depsCommandN
 # The deps are a series of run commands which are added to the second stage of
 # the build process. This is normally where you will install package and library
 # dependencies for your app. Adjust the installed version of python if you want.
@@ -86,26 +90,28 @@ deps:
 
 # List of daemon commands here in the format:
 # daemons:
-#  - command1
-#  - command2
+#  - daemonCommand1
+#  - daemonCommand2
 #  ...
-#  - commandN
+#  - daemonCommandN
 # A Daemon is just a command that runs in the background as long as your app is
 # running (even if it isn't actively processing). Rising Cloud does not monitor
 # the health of your daemons, so you will need to build dynamic checks into your
 # app if you cannot guarantee your Daemon's health. If you add/remove a daemon
 # here and you still want the boilerplate testing to work, be sure to also
-# add/remove the daemon from the `make rc-start-daemons` command.
+# add/remove the daemon from the `make rc-start-daemons` command. Common reasons
+# to use a daemon generally revolve around reducing the time spent loading large
+# libraries or files that are necessary for every job.
 daemons: []
 
 # The command which will be run whenever a job is sent to the Rising Cloud
-# worker. This command should be resonsible for reading from "request.json" and
-# writing to "response.json". Note: In order to run a .sh file using this
+# worker. This command should be resonsible for reading from "request.json"
+# and writing to "response.json". Note: In order to run a .sh file using this
 # attribute, the run command should look like: `bash -c (SCRIPT_NAME)`.
 run: python3 main.py
 
-# The timeout is the amount of time in milliseconds a job can take before Rising
-# Cloud considers it to have failed and kills the process automatically.
+# The timeout is the amount of time in milliseconds a job can take before
+# Rising Cloud considers it to have failed and kills the process automatically.
 timeout: 300000
 
 # List of environment variables to include in your app in this format:
