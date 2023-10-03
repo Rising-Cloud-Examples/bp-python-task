@@ -13,8 +13,9 @@ rc-build-test-image:
 
 # Spin up the test-container. Stop and delete an old one if it exists.
 # The test container will be doing nothing until we `docker exec` a command
-# onto it. This way we can hijack the run process to run tests in
-# the container mimicking how the task would run on Rising Cloud.
+# onto it. This way we can hijack the run process to run tests in the container
+# mimicking how the task would run on Rising Cloud. We also attach a volume
+# mapping the development directory to the container app to aid with quick dev.
 rc-start-container:
 	make rc-kill-container
 	docker run -i -d --entrypoint="bash" --name bp-python-task --volume ${PWD}:/app/app bp-python-task
@@ -27,7 +28,7 @@ rc-start-container:
 rc-start-daemons:
 #	docker exec -d bp-python-task {DAEMON_COMMAND}
 
-# Stops and removes the existing bp-pyton-task container
+# Stops and removes the existing bp-python-task container
 rc-kill-container:
 	docker stop bp-python-task || true
 	docker rm bp-python-task || true

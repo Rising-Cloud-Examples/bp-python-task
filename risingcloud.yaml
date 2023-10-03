@@ -2,7 +2,7 @@
 # `risingcloud push` after you make any changes here. If you don't,
 # the changes won't be reflected in the app when it is built.
 # See https://risingcloud.com/docs/config-glossary for more details
-# about individual fields and how the operate.
+# about individual fields and how they operate.
 
 # The name of the app is what is displayed on the ui for developers. By default
 # this matches the url. However, unlike the url, this may be changed as desired.
