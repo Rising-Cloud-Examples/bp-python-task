@@ -1,8 +1,8 @@
 # bp-python
 This is part of the Rising Cloud Boilerplate Repositories. The purpose of
-`bp-python` and other boilerplate repositories is to quickly get applications
-running on Rising Cloud, without having to worry about any of the basic
-configuration that is required.
+`bp-python-task` and other boilerplate repositories is to quickly get
+applications running on Rising Cloud, without having to worry about any of the
+basic configuration that is required.
 
 The boilerplate is functional out of the box. If you follow the steps under
 the "Using this Boilerplate Repository" without making any changes, you will
@@ -15,7 +15,8 @@ This application demonstrates a working app in base python, with no added
 dependencies/libraries/packages. It is intended to use the CLI to create a
 task based on this code. If you did not use the CLI, please install it from
 [here](https://risingcloud.com/docs/install) and follow the steps shown
-[here](TODO: Insert CLI command link here) to begin.
+[here]() to begin.
+TODO: Insert CLI command link above
 
 ## Rising Cloud Task Overview
 See [here](https://risingcloud.com/docs/technicals) for useful information
@@ -42,30 +43,30 @@ container, and test requests.
 To get the local docker container up and running for testing and development:
 1. Ensure you are logged into the risingcloud cli with a valid token:
 `risingcloud login`.
-2. Run the local risingcloud build command: `risingcloud build --local`.
+1. Run the local risingcloud build command: `risingcloud build --local`.
 This will grab the currently pushed yaml from Rising Cloud's repository,
 and generate the relevant portion of the dockerfile that Rising Cloud uses
 during the normal build step. That dockerfile is then automatically run
-locally and will store the resultant image under the taskurl.
-3. Start up the test container: `make rc-start-container`. This spins
+locally and will save the resultant image as bp-python-task
+1. Start up the test container: `make rc-start-container`. This spins
 up the image that was just built and keeps it running in the background. It
 will automatically delete any old running containers of the same name for you.
 If you have any daemons, be sure to add them under the `make rc-start-daemons`
 command. They will automatically start up when you run the below command.
 It will also attach a volume to the container so that you can easily test
 changes to your code without requiring a docker build every time.
-4. Populate any test `request.json` files you'd like to be able to test in
+1. Populate any test `request.json` files you'd like to be able to test in
 the `/rcTests/reqeusts` folder. As long as they are named in the format
 `{TEST_NAME}.json` and are proper json, they will work fine!
-5. To run a single request test through: `make rc-test-single f={TEST_NAME}`.
+1. To run a single request test through: `make rc-test-single f={TEST_NAME}`.
 This will copy the request into `./request.json` and then run `python3 main.py`
 in the docker container. The resultant file will be located at `./response.json`
 as well as in `rcTests/responses` folder. For this command to work, the file
 `/rcTests/requests/{TEST_NAME}.json` must exist.
-6. To run every test in the `/rcTests/requests/` folder in sequence:
+1. To run every test in the `/rcTests/requests/` folder in sequence:
 `make rc-test-all`.This will essentially run the `rc-test-single` over
 and over for every test file defined.
-7. Whenever you're done testing, you can clean up the docker environment with
+1. Whenever you're done testing, you can clean up the docker environment with
 `rc-kill-container`.
 
 ### Building/Deploying
@@ -85,13 +86,13 @@ at https://my.risingcloud.com/task/bp-python-task/jobs.  On the jobs page, you
 may press the "New Job Request" button to send a json request to the worker.
 If that is successful, you will likely next want to programmatically send jobs
 to your worker from elsewhere. Rising Cloud automatically registers a url for
-you so you can communicate with your task. The URL for this tasks should be
+you so you can communicate with your task. The URL for this task is
 https://bp-python-task.risingcloud.app/risingcloud/jobs.
 For detailed information on how to communicate with your application, see the
 docs [here](https://risingcloud.com/docs/task-api).
 
 ### Adding Custom Functionality
 This repository is boilerplate for a reason. Please add, edit, and customize
-code to your liking for whatever your use case may be. So code comments were
+code to your liking for whatever your use case may be. Some code comments were
 left in the places where most applications are most likely to add or modify
 the boilerplate.
