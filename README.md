@@ -28,7 +28,6 @@ daemons, networking, input/output, workers, and more there.
 ### Requirements
 - Python 3.5+
 - Docker (To assist with local building and testing)
-- Support for `make` commands (To assist with local building and testing)
 
 ### Local Testing and Development
 
@@ -48,26 +47,39 @@ This will grab the currently pushed yaml from Rising Cloud's repository,
 and generate the relevant portion of the dockerfile that Rising Cloud uses
 during the normal build step. That dockerfile is then automatically run
 locally and will save the resultant image as bp-python-task
-1. Start up the test container: `make rc-start-container`. This spins
-up the image that was just built and keeps it running in the background. It
-will automatically delete any old running containers of the same name for you.
-If you have any daemons, be sure to add them under the `make rc-start-daemons`
-command. They will automatically start up when you run the below command.
+1. Start up the test container: `risingcloud run -s`. This spins up the image
+that was just built and the `-s` (`start`) flag keeps it running in the
+background. It will automatically delete any old running containers of the same
+name for you. Your daemons will automatically start up when you run the command.
 It will also attach a volume to the container so that you can easily test
-changes to your code without requiring a docker build every time.
+changes to your code without requiring a docker build every time. This volumne
+matches the working directory with the /app/app directory on the image. You can
+skip this step if you'd like, but it's often easier to debug your container if
+it is left running in a detached state.
 1. Populate any test `request.json` files you'd like to be able to test in
-the `/rcTests/reqeusts` folder. As long as they are named in the format
+the `/tests/reqeusts` folder. As long as they are named in the format
 `{TEST_NAME}.json` and are proper json, they will work fine!
-1. To run a single request test through: `make rc-test-single f={TEST_NAME}`.
-This will copy the request into `./request.json` and then run `python3 main.py`
-in the docker container. The resultant file will be located at `./response.json`
-as well as in `rcTests/responses` folder. For this command to work, the file
-`/rcTests/requests/{TEST_NAME}.json` must exist.
-1. To run every test in the `/rcTests/requests/` folder in sequence:
-`make rc-test-all`.This will essentially run the `rc-test-single` over
-and over for every test file defined.
+1. To run a test on `request.json`: `risingcloud run -d`. To run any arbitrary
+request test through: `risingcloud run -i {INPUT_FILEPATH} -d`. This will copy
+the request into `request.json` and then run the `run` command in the testing
+docker container. The resultant file will be located at `response.json`.
+If you'd like to save the file elsewhere, you can instead run
+`risingcloud run -i {INPUT_FILEPATH} -o {OUTPUT_FILEPATH} -d`. If you would
+like the container to shut down after processing, you can remove the `-d` flag.
+1. To run every test in a folder, run the above commands, but simply point the
+`{INPUT_FILEPATH}` and `{OUTPUT_FILEPATH}` to a folder of tests instead. This
+folder can have any structure as long as it's base level it contains only json
+files.
 1. Whenever you're done testing, you can clean up the docker environment with
-`rc-kill-container`.
+`risingcloud kill-local`.
+
+For all the above commands, you can expedite testing and remove the prompt
+"`No task URL provided. Use "bp-python-task" as your task URL? [y/n]`" by
+providing the command with the taskURL in question on the end of the command.
+- ex. 1: `risingcloud build --local` -> `risingcloud build --local bp-python-task`
+- ex. 2: `risingcloud run -s` -> `risingcloud run -s bp-python-task`
+- ex. 3: `risingcloud run -i {INPUT_FILEPATH} -o {OUTPUT_FILEPATH} -d` ->
+`risingcloud run -i {INPUT_FILEPATH} -o {OUTPUT_FILEPATH} -d bp-python-task`
 
 ### Building/Deploying
 Once you have locally tested your app and verified it's functioning as expected,
@@ -90,6 +102,13 @@ you so you can communicate with your task. The URL for this task is
 https://bp-python-task.risingcloud.app/risingcloud/jobs.
 For detailed information on how to communicate with your application, see the
 docs [here](https://risingcloud.com/docs/task-api).
+
+### Securing your App
+You can navigate to this page
+https://my.risingcloud.com/task/bp-python-flask-service/security and check
+"Require app users use an API key to send jobs to this task." to require a key
+to be included when commnunicating with your app. The key should be included
+as "X-RisingCloud-Auth" in the headers.
 
 ### Adding Custom Functionality
 This repository is boilerplate for a reason. Please add, edit, and customize

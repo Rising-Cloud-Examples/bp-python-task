@@ -32,13 +32,9 @@ workspace: Sandbox
 # The base docker image to use when creating the dockerfile for the app. For
 # "risingcloud" mode apps, you can use any linux base image. This requirement
 # is due to the additional code risingcloud adds to your app to make it
-# integrate with the greater risingcloud ecosystem.
-# WARNING: If you change this, you may run into issues with the boilerplate
-# makefile causing built-in testing to fail. Additionally, different base
-# images might require different "build" and "deps" steps. Be sure you are
-# comfortable with the base image you are working with before making those
-# changes.
-from: ubuntu:22.04
+# integrate with the greater risingcloud ecosystem. The only requirement
+# for your image to run on Rising Cloud is that the base image is linux based.
+from: python:alpine
 
 # The Rising Cloud builder is set up as a multi-stage docker build. The "build"
 # attribute of the yaml describes what happens in the first stage and "deps"
@@ -75,10 +71,7 @@ build: []
 # the build process. This is normally where you will install package and library
 # dependencies for your app. Adjust the installed version of python if you want.
 # Ensure any commands in daemons and run match the version of python specified.
-deps:
- - apt-get update
- - apt-get -y upgrade
- - apt-get install -y python3
+deps: []
 
 # List of daemon commands here in the format:
 # daemons:
@@ -108,10 +101,10 @@ timeout: 300000
 
 # List of environment variables to include in your app in this format:
 # env:
-#  - key1: value1
-#  - key2: value2
+#  key1: value1
+#  key2: value2
 #  ...
-#  - keyN: valueN
+#  keyN: valueN
 # These values are automatically loaded into the deployed app as environment
 # variables. A common pattern if you have separate deployments of the same code
 # in different environments, is to have multiple risingcloud.yaml files in the
