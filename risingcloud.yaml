@@ -34,7 +34,7 @@ workspace: Sandbox
 # is due to the additional code risingcloud adds to your app to make it
 # integrate with the greater risingcloud ecosystem. The only requirement
 # for your image to run on Rising Cloud is that the base image is linux based.
-from: python:alpine
+from: python:3.11-alpine
 
 # The Rising Cloud builder is set up as a multi-stage docker build. The "build"
 # attribute of the yaml describes what happens in the first stage and "deps"
@@ -93,7 +93,7 @@ daemons: []
 # worker. This command should be resonsible for reading from "request.json"
 # and writing to "response.json". Note: In order to run a .sh file using this
 # attribute, the run command should look like: `bash -c (SCRIPT_NAME)`.
-run: python3 main.py
+run: python main.py
 
 # The timeout is the amount of time in milliseconds a job can take before
 # Rising Cloud considers it to have failed and kills the process automatically.

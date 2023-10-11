@@ -103,6 +103,13 @@ https://bp-python-task.risingcloud.app/risingcloud/jobs.
 For detailed information on how to communicate with your application, see the
 docs [here](https://risingcloud.com/docs/task-api).
 
+If you'd like to test the deployment with Postman or Insomnia, you can do that
+as well. Open up the `requestCollection.json` file in either application.
+Modify the collection as you please, but this should give a good starting point
+on how you can interact with your application locally and when it is deployed.
+In Postman, the `{{host}}` and `{{auth}}` variables are set in the collection
+variables. In Insomnia, they will be imported under the Environment Overrides.
+
 ### Securing your App
 You can navigate to this page
 https://my.risingcloud.com/task/bp-python-flask-service/security and check
