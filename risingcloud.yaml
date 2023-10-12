@@ -1,9 +1,3 @@
-# Make sure you push the latest risingcloud.yaml file by running
-# `risingcloud push` after you make any changes here. If you don't,
-# the changes won't be reflected in the app when it is built.
-# See https://risingcloud.com/docs/config-glossary for more details
-# about individual fields and how they operate.
-
 # The name of the app is what is displayed on the ui for developers. By default
 # this matches the url. However, unlike the url, this may be changed as desired.
 name: bp-python-task
@@ -48,7 +42,6 @@ from: python:3.11-alpine
 # When a build is completed, you can view the output of the build log to see
 # what the multi-stage build looks like. "build" steps are prefaced with
 # "[RisingCloud]", and "deps" steps are prefaced with "[deps]".
-
 
 # List build script here in the format:
 # build:
@@ -108,7 +101,7 @@ timeout: 300000
 # These values are automatically loaded into the deployed app as environment
 # variables. A common pattern if you have separate deployments of the same code
 # in different environments, is to have multiple risingcloud.yaml files in the
-# project dir, named risincloud-{env}.yaml
+# project dir, named risingcloud-{env}.yaml
 env: {}
 
 # Min and max workers determines the scaling bounds for your application. Rising
