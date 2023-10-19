@@ -4,7 +4,7 @@ This is part of the Rising Cloud Boilerplate Repositories. The purpose of
 applications running on Rising Cloud, without having to worry about any of the
 basic configuration that is required.
 
-The boilerplate is functional out of the box. If you follow the steps under
+This boilerplate is functional out of the box. If you follow the steps under
 the "Using this Boilerplate Repository" without making any changes, you will
 have made a fully functioning Rising Cloud Task! If this is your first time
 creating a Rising Cloud task of this type, it is recommended to follow those
@@ -14,9 +14,8 @@ and are comfortable with the layour, adjust the code to fit individual needs.
 This application demonstrates a working app in base python, with no added
 dependencies/libraries/packages. It is intended to use the CLI to create a
 task based on this code. If you did not use the CLI, please install it from
-[here](https://risingcloud.com/docs/install) and follow the steps shown
-[here]() to begin.
-TODO: Insert CLI command link above
+[here](https://risingcloud.com/docs/install) before following the rest of the
+steps below.
 
 ## Rising Cloud Task Overview
 See [here](https://risingcloud.com/docs/technicals) for useful information

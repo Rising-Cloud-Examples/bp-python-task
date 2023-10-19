@@ -38,7 +38,8 @@ def writeResponse(response: typing.Any, fp: str = "response.json"):
 if __name__ == "__main__":
 
     # We first read the request from "request.json". If you'd like to do any
-    # preprocessing to the request, edit the readRequest() function accordingly.
+    # pre-processing to the request, edit the readRequest() function and return
+    # with the appropriate processed data type.
     request = readRequest()
 
     # To process the request with an arbitrary function, import the function
@@ -54,5 +55,6 @@ if __name__ == "__main__":
     print("This is a demo log to stdout")
 
     # Serialize and write out the response to "response.json". If you'd like to
-    # do any post processing to the response, edit the writeResponse() function.
+    # do any post-processing to the response, edit the writeResponse()
+    # function to take in the unprocessed datatype and transform it there.
     writeResponse(response)

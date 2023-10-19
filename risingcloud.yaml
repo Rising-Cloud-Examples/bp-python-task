@@ -18,7 +18,7 @@ team: null
 # This is static. Don't edit this value after creation!
 mode: risingcloud
 
-# Workspace is simply an organizational tool. You may change this  value and the
+# Workspace is simply an organizational tool. You may change this value and the
 # app will be change the workspace it appears under in the ui. You do not have
 # to create a new workspace, simply changing the value here will update the UI.
 workspace: Sandbox
