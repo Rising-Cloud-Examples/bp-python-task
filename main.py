@@ -3,32 +3,34 @@ import json, typing
 ########################
 # I/O HELPER FUNCTIONS #
 ########################
-def readRequest(fp: str = "request.json") -> typing.Any:
+def readRequest() -> typing.Any:
     '''
     readRequest will return the Rising Cloud request made to the worker.
-    By default, this returns a dict. This reads from the given filepath (by
+    By default, this returns a dict. This reads from the request filepath, (by
     default this is "request.json" which is created by Rising Cloud when the
-    worker recieves a request) and outputs loaded and transformed data.
+    worker receives a request) and outputs loaded and transformed data.
     '''
 
-    with open(fp, "r") as f:
+    with open("./request.json", "r") as f:
         request = json.load(f)
 
-        # Perform any transformations of the input data here
+        # Perform any transformations of the input data here. Common
+        # transformations might be to convert to another data type or to use
+        # the request to go fetch data through a request.
 
         return request
 
-def writeResponse(response: typing.Any, fp: str = "response.json"):
+def writeResponse(response: typing.Any):
     '''
     writeResponse takes any json-serializable object and writes the serialized
-    string to the given filepath. When running on the Rising Cloud platform,
+    string to the response filepath. When running on the Rising Cloud platform,
     this filepath should always be "response.json" as that is where Rising Cloud
     automatically looks for a response after the main function terminates.
     '''
 
     # Perform any transformations to output data here.
     
-    with open(fp, "w") as f:
+    with open("./response.json", "w") as f:
         json.dump(response, f)
 
 

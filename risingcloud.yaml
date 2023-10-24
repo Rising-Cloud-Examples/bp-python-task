@@ -83,7 +83,7 @@ deps: []
 daemons: []
 
 # The command which will be run whenever a job is sent to the Rising Cloud
-# worker. This command should be resonsible for reading from "request.json"
+# worker. This command should be responsible for reading from "request.json"
 # and writing to "response.json". Note: In order to run a .sh file using this
 # attribute, the run command should look like: `bash -c (SCRIPT_NAME)`.
 run: python main.py
