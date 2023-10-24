@@ -5,7 +5,7 @@ name: bp-python-task
 # The app url is a unique value created during app initialization. Once it is
 # created, it cannot be changed. This is where you will send requests:
 # https://bp-python-task.risingcloud.app/risingcloud/jobs
-# This is static. Don't edit this value after creation!
+# This is static. Don't edit this value after task creation!
 url: bp-python-task
 
 # The team ID is the internal ID of the team that owns the app.
@@ -25,10 +25,10 @@ workspace: Sandbox
 
 # The base docker image to use when creating the dockerfile for the app. For
 # "risingcloud" mode apps, you can use any linux base image. This requirement
-# is due to the additional code risingcloud adds to your app to make it
-# integrate with the greater risingcloud ecosystem. The only requirement
-# for your image to run on Rising Cloud is that the base image is linux based.
-from: python:3.11-alpine
+# is due to the Rising Cloud Worker code that Rising Cloud adds to your Task to
+# integrate it with the greater risingcloud ecosystem. This is the only
+# requirement needed for your image to run on Rising Cloud.
+from: python3.11-alpine
 
 # The Rising Cloud builder is set up as a multi-stage docker build. The "build"
 # attribute of the yaml describes what happens in the first stage and "deps"
@@ -36,8 +36,13 @@ from: python:3.11-alpine
 # stage are copied over so the "deps" stage has them. None of the system
 # dependencies required to generate those files are passed to the "deps" step.
 # Using the "build" attribute is more complex, and is completely optional.
-# Each command in both steps are added to the dockerfile stage as
-# `RUN {COMMAND}` so ensure each command is compatible with that form.
+# Each command in both the "build" and "deps" steps are added to the dockerfile
+# stage as `RUN {COMMAND}`, so ensure each command is compatible with that form.
+
+# The build process can be complicated. If you would like more details on the
+# process or to see some specific examples, please visit our docs page on the
+# build process here: 
+# TODO: Insert a link above to the new build process
 
 # When a build is completed, you can view the output of the build log to see
 # what the multi-stage build looks like. "build" steps are prefaced with
@@ -62,8 +67,7 @@ build: []
 #  - depsCommandN
 # The deps are a series of run commands which are added to the second stage of
 # the build process. This is normally where you will install package and library
-# dependencies for your app. Adjust the installed version of python if you want.
-# Ensure any commands in daemons and run match the version of python specified.
+# dependencies for your app.
 deps: []
 
 # List of daemon commands here in the format:
@@ -75,10 +79,8 @@ deps: []
 # A Daemon is just a command that runs in the background as long as your app is
 # running (even if it isn't actively processing). Rising Cloud does not monitor
 # the health of your daemons, so you will need to build dynamic checks into your
-# app if you cannot guarantee your Daemon's health. If you add/remove a daemon
-# here and you still want the boilerplate testing to work, be sure to also
-# add/remove the daemon from the `make rc-start-daemons` command. Common reasons
-# to use a daemon generally revolve around reducing the time spent loading large
+# app if you cannot guarantee your Daemon's health. Common reasons to use a
+# daemon generally revolve around reducing the time spent loading large
 # libraries or files that are necessary for every job.
 daemons: []
 
