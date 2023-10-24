@@ -25,8 +25,8 @@ page up while reading through this template.
 ## bp-python-task
 The `bp-python-task` template is a demonstration of the bare minimum necessary
 to get a python Rising Cloud Task up and running on the Rising Cloud Platform.
-By following the step below, you will be left with boilerplate code that will
-allow to easily make adaptations for your very own python Rising Cloud Task.
+By following the steps below, you will be left with boilerplate code that will
+allow you to easily make adaptations for your very own python Rising Cloud Task.
 
 ## Rising Cloud Task Overview
 This template will create a Rising Cloud Task. Rising Cloud Tasks are best
@@ -308,7 +308,7 @@ headers of the request.
 
 ### Adding Custom Functionality
 This template repository is intended to be a boilerplate and a jump-start for
-Python based tasks.
+Python Tasks.
 
 Please add, edit, and customize this code to your liking for whatever your
 specific use case may be. Code comments were left throughout the template to
