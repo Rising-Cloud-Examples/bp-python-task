@@ -1,12 +1,12 @@
 # The name of the app is what is displayed on the ui for developers. By default
 # this matches the url. However, unlike the url, this may be changed as desired.
-name: bp-python-task
+name: template-python-task
 
 # The app url is a unique value created during app initialization. Once it is
 # created, it cannot be changed. This is where you will send requests:
-# https://bp-python-task.risingcloud.app/risingcloud/jobs
+# https://template-python-task.risingcloud.app/risingcloud/jobs
 # This is static. Don't edit this value after task creation!
-url: bp-python-task
+url: template-python-task
 
 # The team ID is the internal ID of the team that owns the app.
 # This is static. Don't edit this value after creation!

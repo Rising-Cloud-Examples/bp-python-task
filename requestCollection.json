@@ -1,7 +1,7 @@
 {
 	"info": {
-		"name": "bp-python-task",
-		"description": "Test collection for the bp-python-task Rising Cloud Template",
+		"name": "template-python-task",
+		"description": "Test collection for the template-python-task Rising Cloud Template",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -127,7 +127,7 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "https://bp-python-task.risingcloud.app",
+			"value": "https://template-python-task.risingcloud.app",
 			"type": "string"
 		},
 		{
