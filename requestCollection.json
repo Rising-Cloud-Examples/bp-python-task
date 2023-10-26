@@ -1,11 +1,8 @@
 {
 	"info": {
-		"_postman_id": "fbc4c6e4-c7c6-4fdc-b705-f94467972510",
 		"name": "bp-python-task",
-		"description": "Test collection for the bp-python-flask-service task",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "29936542",
-		"_collection_link": "https://winter-moon-484050.postman.co/workspace/Innovation~f5c2e396-24b4-4682-9573-85c8dee51405/collection/29936542-fbc4c6e4-c7c6-4fdc-b705-f94467972510?action=share&source=collection_link&creator=29936542"
+		"description": "Test collection for the bp-python-task Rising Cloud Template",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -59,14 +56,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}/risingcloud/jobs/0f713844-cfc3-4745-adc5-bf16e45c0161",
+					"raw": "{{host}}/risingcloud/jobs/[JOB_ID]",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"risingcloud",
 						"jobs",
-						"0f713844-cfc3-4745-adc5-bf16e45c0161"
+						"[JOB_ID]"
 					]
 				}
 			},
@@ -93,14 +90,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/risingcloud/jobs/0f713844-cfc3-4745-adc5-bf16e45c0161",
+					"raw": "{{host}}/risingcloud/jobs/[JOB_ID]",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"risingcloud",
 						"jobs",
-						"0f713844-cfc3-4745-adc5-bf16e45c0161"
+						"[JOB_ID]"
 					]
 				}
 			},
