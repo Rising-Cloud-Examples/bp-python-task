@@ -56,14 +56,14 @@
 					}
 				],
 				"url": {
-					"raw": "{{host}}/risingcloud/jobs/[JOB_ID]",
+					"raw": "{{host}}/risingcloud/jobs/:id",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"risingcloud",
 						"jobs",
-						"[JOB_ID]"
+						":id"
 					]
 				}
 			},
@@ -90,14 +90,14 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/risingcloud/jobs/[JOB_ID]",
+					"raw": "{{host}}/risingcloud/jobs/:id",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
 						"risingcloud",
 						"jobs",
-						"[JOB_ID]"
+						":id"
 					]
 				}
 			},
