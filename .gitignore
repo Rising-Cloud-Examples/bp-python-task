@@ -1,6 +1,8 @@
 .dockerignore
 **/__pycache__
 
+venv
+
 tests/responses/*
 !tests/responses/.tmp
 request.json
