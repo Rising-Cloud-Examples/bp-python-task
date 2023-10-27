@@ -1,12 +1,12 @@
 # The name of the app is what is displayed on the ui for developers. By default
 # this matches the url. However, unlike the url, this may be changed as desired.
-name: template-python-task
+name: bp-python-task
 
 # The app url is a unique value created during app initialization. Once it is
 # created, it cannot be changed. This is where you will send requests:
-# https://template-python-task.risingcloud.app/risingcloud/jobs
+# https://bp-python-task.risingcloud.app/risingcloud/jobs
 # This is static. Don't edit this value after task creation!
-url: template-python-task
+url: bp-python-task
 
 # The team ID is the internal ID of the team that owns the app.
 # This is static. Don't edit this value after creation!
@@ -28,7 +28,7 @@ workspace: Sandbox
 # is due to the Rising Cloud Worker code that Rising Cloud adds to your Task to
 # integrate it with the greater risingcloud ecosystem. This is the only
 # requirement needed for your image to run on Rising Cloud.
-from: python3.11-alpine
+from: python:3.11-alpine
 
 # The Rising Cloud builder is set up as a multi-stage docker build. The "build"
 # attribute of the yaml describes what happens in the first stage and "deps"
@@ -68,7 +68,8 @@ build: []
 # The deps are a series of run commands which are added to the second stage of
 # the build process. This is normally where you will install package and library
 # dependencies for your app.
-deps: []
+deps:
+  - pip install -r requirements.txt
 
 # List of daemon commands here in the format:
 # daemons:

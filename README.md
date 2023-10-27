@@ -1,6 +1,6 @@
 # Overview
-This is part of the Rising Cloud Boilerplate series. The purpose of
-`template-python-task` and other the templates is to quickly get you started get you
+This is part of the Rising Cloud Boilerplate Series. The purpose of
+`bp-python-task` and other the templates is to quickly get you started get you
 started building, testing and running code on Rising Cloud, with minimal steps.
 
 This template will provide a working application out of the box. If you
@@ -22,8 +22,8 @@ It is recommended to have our
 [Rising Cloud Terminology]()
 page up while reading through this template.
 
-## template-python-task
-The `template-python-task` template is a demonstration of the bare minimum necessary
+## bp-python-task
+The `bp-python-task` template is a demonstration of the bare minimum necessary
 to get a python Rising Cloud Task up and running on the Rising Cloud Platform.
 By following the steps below, you will be left with boilerplate code that will
 allow you to easily make adaptations for your very own python Rising Cloud Task.
@@ -89,12 +89,14 @@ desktop application [here](https://www.docker.com/products/docker-desktop/).
   - If you would like to install Docker without the desktop application, follow
 the official Docker Engine installation instructions for your platform found
 [here](https://docs.docker.com/engine/install/).
+- Postman or Insomnia (To assist with testing)
+  - 
 
 
 ### Setup the Template
 
-1. Navigate to an empty folder on you local system were you would like to create
-your project.
+1. Navigate to an empty folder on your local system were you would like to
+create your project You can name this folder whatever you would like.
    - You may also start from a project/folder that already has code, although
 you will not be able to pull from the template if there are any filename
 clashes between the template repository and your local files.
@@ -102,12 +104,12 @@ clashes between the template repository and your local files.
 1. Start the Task Initialization Wizard by running: `risingcloud init`
    - ***To use this template, be sure to select the "risingcloud" mode when the
 wizard prompts you for the mode of your task. Also make sure you specify the
-template as "template-python-task".***
+template as "bp-python-task".***
    - For the rest of this document, the Task URL you create for your task will
 be referred to as `$TASK_URL`.
    - If you would like to initialize a task without using the initialization
 wizard, use this command instead:
-`risingcloud init --risingcloud --template template-python-task $TASK_URL`
+`risingcloud init --risingcloud --template bp-python-task $TASK_URL`
    - If this is your first time making a Rising Cloud Task, it is recommended to
 use the wizard to familiarize yourself with all the options.
 
@@ -128,7 +130,7 @@ initialization process.
 the template files and review the code comments to help orient yourself.
 
 1. You are now ready to test, build and run your new Rising Cloud Task based on
-the template-python-task template.
+the bp-python-task template.
 
 ### Local Testing
 
@@ -224,7 +226,7 @@ the Rising Cloud build servers.
 the build completes, you may pass the `--deploy` flag into the build command
 like so: `risingcloud build --deploy`.
    - If you would prefer to deploy your task through the UI, navigate to
-https://my.risingcloud.com/task/`$TASK_URL`/ and deploy the task
+https://my.risingcloud.com/task/$TASK_URL/ and deploy the task
 by pressing the "Deploy" button on the top right of the page.
 - If you'd like the application to automatically update based on the local task
 configuration before pushing, you can add the `--reconfigure` flag into the
@@ -235,15 +237,15 @@ made local changes to the `risingcloud.yaml`, this is a handy shorthand.
 You can monitor the build progress via the link output from the command, through
 the `risingcloud status $TASK_URL` command, or just navigate to the
 "Build Status" page of the application you are building found here:
-https://my.risingcloud.com/task/`$TASK_URL`/build-status
+https://my.risingcloud.com/task/$TASK_URL/build-status
 
 ### Using your Deployed Rising Cloud Task
 When the application is built, how do you use it?
 
 #### With Insomnia or Postman
-You may also test the deployment using Postman or Insomnia. Rising Cloud
+You may test your deployment using Postman or Insomnia. Rising Cloud
 automatically registers a url for you so you can communicate with your task.
-The URL for this task is https://`$TASK_URL`.risingcloud.app/risingcloud/jobs.
+The URL for your task is https://$TASK_URL.risingcloud.app/risingcloud/jobs.
 - Open up the `requestCollection.json` file in either Insomnia or Postman
   - A couple sample requests are included by default, but you can easily
 copy in some test json requests you have into the body to test specific cases.
@@ -255,6 +257,8 @@ under the Environment Overrides.
 the docs [here](https://risingcloud.com/docs/task-api).
 
 #### With Our CLI
+You may also test your deployment with our CLI. The Rising Cloud CLI has some
+built in functions that allow you to queue jobs and view results.
 - You can post a job to your task with our CLI using the `risingcloud jobs post`
 command. By default, this will send whatever is in `./request.json`, but you
 can specify a custom file location with the `--request` flag.
@@ -335,4 +339,9 @@ out our docs page on the build process [here]().
 how to create one, and some rules of thumb for using them, see our docs page
 [here]().
 
+TODO: Add Daemon link above when the daemon page is created
 
+1. If you need to add any dependencies to your project, you can add them to the
+`requirements.txt` in the root directory. By default, this file is empty, but
+the it is still included to make it clear how you would go about adding those
+dependencies in the `deps` section of the configuration.
