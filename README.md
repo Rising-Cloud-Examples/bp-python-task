@@ -1,6 +1,6 @@
 # Overview
 This is part of the Rising Cloud Boilerplate Series. The purpose of
-`bp-python-task` and other the templates is to quickly get you started get you
+`template-python-task` and other the templates is to quickly get you started get you
 started building, testing and running code on Rising Cloud, with minimal steps.
 
 This template will provide a working application out of the box. If you
@@ -22,8 +22,8 @@ It is recommended to have our
 [Rising Cloud Terminology]()
 page up while reading through this template.
 
-## bp-python-task
-The `bp-python-task` template is a demonstration of the bare minimum necessary
+## template-python-task
+The `template-python-task` template is a demonstration of the bare minimum necessary
 to get a python Rising Cloud Task up and running on the Rising Cloud Platform.
 By following the steps below, you will be left with boilerplate code that will
 allow you to easily make adaptations for your very own python Rising Cloud Task.
@@ -104,12 +104,12 @@ clashes between the template repository and your local files.
 1. Start the Task Initialization Wizard by running: `risingcloud init`
    - ***To use this template, be sure to select the "risingcloud" mode when the
 wizard prompts you for the mode of your task. Also make sure you specify the
-template as "bp-python-task".***
+template as "template-python-task".***
    - For the rest of this document, the Task URL you create for your task will
 be referred to as `$TASK_URL`.
    - If you would like to initialize a task without using the initialization
 wizard, use this command instead:
-`risingcloud init --risingcloud --template bp-python-task $TASK_URL`
+`risingcloud init --risingcloud --template template-python-task $TASK_URL`
    - If this is your first time making a Rising Cloud Task, it is recommended to
 use the wizard to familiarize yourself with all the options.
 
@@ -130,7 +130,7 @@ initialization process.
 the template files and review the code comments to help orient yourself.
 
 1. You are now ready to test, build and run your new Rising Cloud Task based on
-the bp-python-task template.
+the template-python-task template.
 
 ### Local Testing
 
