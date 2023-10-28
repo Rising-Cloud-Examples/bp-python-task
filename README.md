@@ -145,7 +145,7 @@ local development environment.
 1. Ensure you are logged into the Rising Cloud CLI:
 `risingcloud login`.
 
-1. Run the local Rising Cloud build command: `risingcloud local build`.
+2. Run the local Rising Cloud build command: `risingcloud local build`.
    - This will grab the most recent `risingcloud.yaml` from Rising Cloud and
 generate a temporary dockerfile that mimics the one Rising Cloud uses to build
 during the actual build step.
@@ -156,7 +156,7 @@ you run the `local build` command.
    - /app/app is the absolute path your working directory will be in the
 resulting Docker image.
 
-1. Start up the test container: `risingcloud local start`.
+3. Start up the test container: `risingcloud local start`.
    - This spins up an instance of the image that was just built as a detached
 docker container.
    - It will automatically delete any old running containers of the same name
@@ -169,24 +169,35 @@ maps your working directory to the /app/app directory on the container.
    - ***This command isn't strictly necessary. If you would prefer to not leave
 your container detached while testing locally, you can skip this step.***
 
-1. Populate any test files you'd like to be able to test in
-the `/tests/requests` folder.
+4. Create a generic test file located at `./request.json` with the contents
+```json
+{
+  "sampleField": "sampleValue"
+}
+```
+
+5. To run a test file through your container, use: `risingcloud local run`.
+   - This command runs the command specified in the `risingcloud.yaml` under the
+"run" heading. By default, that is `run: python main.py`
+for this template.
+   - This will take the ``./request.json` you just created and run it through
+the worker. The processed file will be placed automatically at
+`./response.json`.
+
+6. You can also create many test files. You can create as many as you would like
+and place them in the `/tests/requests` folder.
    - You can put test files anywhere, however this location is standard
 practice for the Rising Cloud template repositories.
    - Ensure test files are named in the format `{TEST_NAME}.json` and are
 proper JSON format.
 
-1. To run a test file through your container, use: `risingcloud local run`.
-   - This command runs the command specified in the `risingcloud.yaml` under the
-"run" heading. By default, that is `run: python main.py`
-for this template.
-   - By default, this will look for a test file to run at `./response.json`
-However you can specify any file location with the `--input {INPUT_FILE}` flag.
+7. The `risingcloud local run` has several flags for more advanced run modes.
+   - You can specify any input file location with the `--input {INPUT_FILE}`
+flag.
      - The `--input` flag also supports folders as inputs. If you pass a folder
 into the command, it will recursively run through every nested folder and send
-every `.json` file through as a test.
-   - By default, the resultant file will be saved at `response.json`. However
-you can also specify any file location you'd like with the
+every `*.json` file through as a test.
+   - You can also specify any output file location you'd like with the
 `--output {OUTPUT_FILE}` flag. Just ensure the parent folder exists if you
 specify an output.
      - If you are running a test with an input folder and keep `--output` as
@@ -196,8 +207,9 @@ processed and written to the same output file.
 when you pass a folder as the input as well. In this case, the entirety of the
 input folder structure will be mimicked into the specified output folder,
 allowing you to track all the responses your task gives.
-   - This will automatically shutdown the container after it has finished
-processing. If you would like to leave it detached, pass the `--detach` flag.
+   - The run command will automatically shutdown the container after it has
+finished processing. If you would like to leave it detached, pass the `--detach`
+flag.
    - If the local container is already running because you previously ran the
 run command with the `--detach` flag or you used the `local start` command, it
 will not be restarted when using this command.
@@ -205,7 +217,7 @@ will not be restarted when using this command.
 would be to update daemons or because you are using a compiled language and have
 a new binary), simply pass the `--restart` flag to the run command.
 
-1. If you have a container that's detached, either because you passed the
+8. If you have a container that's detached, either because you passed the
 `--detach` flag to the `local run` command, or because you ran the
 `local start` command, you can kill it using: `risingcloud local kill`.
 
